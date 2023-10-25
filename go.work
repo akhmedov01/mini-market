@@ -1,6 +1,7 @@
 go 1.21.1
 
 use (
+	./api_geteway
 	./grpc_branch_server
 	./grpc_sale_server
 	./grpc_staff_server

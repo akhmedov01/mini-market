@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package branch_service;
+option go_package = "genproto/branch_service";
+
+
+
+service BranchService {
+    // Sends a greeting
+    rpc Create (CreateBranch) returns (IdReqRes) {}
+    rpc Update (Branch) returns (ResponseString) {}
+    rpc Get (IdReqRes) returns (Branch) {}
+    rpc Delete (IdReqRes) returns (ResponseString) {}
+    rpc GetAll (GetAllBranchRequest) returns (GetAllBranchResponse) {}
+  }
+  
+  // The request message containing the user's name.
+  message CreateBranch {
+    string Name = 1;
+    string Address = 2;
+  }
+
+  message Branch {
+    string Id = 1;
+    string Name = 2;
+    string Address = 3;
+    string Created_at = 4;
+    string Updated_at = 5;
+  }
+
+  message GetAllBranchRequest {
+    int64 Page = 1;
+    int64 Limit = 2;
+    string Name = 3;  
+  }
+  
+  // The response message containing the greetings
+  message IdReqRes {
+    string Id = 1;
+  }
+
+  message ResponseString {
+    string Text = 1;
+  }
+
+  message GetAllBranchResponse {
+    repeated Branch branches = 1;
+    int64 Count = 2;
+  }

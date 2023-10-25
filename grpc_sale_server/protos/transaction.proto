@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package sale_service;
+option go_package = "genproto/sale_service";
+
+import "sale.proto";
+
+service TransactionServer {
+    rpc Create (CreateTransaction) returns (IdRequest) {}
+    rpc Update (Transaction) returns (ResponseString) {}
+    rpc Get (IdRequest) returns (Transaction) {}
+    rpc Delete (IdRequest) returns (ResponseString) {}
+    rpc GetAll (GetAllTransactionRequest) returns (GetAllTransactionResponse) {}
+}
+
+message CreateTransaction {
+    string SaleId = 1;
+    string StaffId = 2;
+    string TransactionType = 3;
+    string SourceType = 4;
+    float Amount = 5;
+    string Text = 6;
+}
+
+message Transaction {
+    string Id = 1;
+    string SaleId = 2;
+    string StaffId = 3;
+    string TransactionType = 4;
+    string SourceType = 5;
+    float Amount = 6;
+    string Text = 7;
+    string CreatedAt = 8;
+    string UpdatedAt = 9;
+}
+
+message GetAllTransactionRequest {
+    int64 Page = 1;
+    int64 Limit = 2;
+    string TransactionType = 3;
+}
+
+message GetAllTransactionResponse {
+    repeated Transaction Transactions = 1;
+    int64 Count = 2;
+}

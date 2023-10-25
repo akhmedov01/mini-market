@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package staff_service;
+option go_package = "genproto/staff_service";
+
+
+service TarifServer {
+    // Sends a greeting
+    rpc Create (CreateTarif) returns (IdRequest) {}
+    rpc Update (Tarif) returns (ResponseString) {}
+    rpc Get (IdRequest) returns (Tarif) {}
+    rpc Delete (IdRequest) returns (ResponseString) {}
+    rpc GetAll (GetAllTarifRequest) returns (GetAllTarifResponse) {}
+    
+  }
+  
+  // The request message containing the user's name.
+  
+  message CreateTarif {
+    string Name = 1;
+    string Type = 2;
+    float AmountForCash =3;
+    float AmountForCard = 4;
+    string FoundedAt =5;
+  }
+
+  message Tarif {
+    string id = 1;
+    string Name = 2;
+    string Type = 3;
+    float AmountForCash = 4;
+    float AmountForCard = 5;
+    string FoundedAt = 6;
+    string Created_at = 7;
+    string Updated_at = 8;
+  }
+
+  message GetAllTarifRequest {
+    int64 page = 1;
+    int64 limit = 2;
+    string Name = 3;
+  }
+  
+  // The response message containing the greetings
+  message IdRequest {
+    string id = 1;
+  }
+
+  message GetAllTarifResponse {
+    repeated Tarif Tarifs = 1;
+    int64 Count = 2;
+  }
+
+  message ResponseString {
+    string Text = 1;
+  }

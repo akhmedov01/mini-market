@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package sale_service;
+option go_package = "genproto/sale_service";
+
+
+service SaleServer {
+    rpc Create (CreateSale) returns (IdRequest) {}
+    rpc Update (Sale) returns (ResponseString) {}
+    rpc Get (IdRequest) returns (Sale) {}
+    rpc Delete (IdRequest) returns (ResponseString) {}
+    rpc GetAll (GetAllSaleRequest) returns (GetAllSaleResponse) {}
+}
+
+message CreateSale {
+    string BranchId = 1;
+    string ShopAssistentId = 2;
+    string CashierId =3;
+    string PaymentType = 4;
+    float Price =5;
+    string Status = 6;
+    string ClientName = 7;
+}
+
+message Sale {
+    string Id = 1;
+    string BranchId = 2;
+    string ShopAssistentId = 3;
+    string CashierId = 4;
+    string PaymentType = 5;
+    float Price = 6;
+    string Status = 7;
+    string ClientName = 8;
+    string Created_at = 9;
+    string Updated_at = 10;
+}
+
+message GetAllSaleRequest {
+    int64 Page = 1;
+    int64 Limit = 2;
+    string ClientName = 3;
+}
+
+message IdRequest {
+    string id = 1;
+}
+
+message GetAllSaleResponse {
+    repeated Sale Sales = 1;
+    int64 Count = 2;
+}
+
+message ResponseString {
+    string Text = 1;
+}

@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package staff_service;
+option go_package = "genproto/staff_service";
+
+import  "tarif.proto";
+
+
+service StaffServer {
+    // Sends a greeting
+    rpc Create (CreateStaff) returns (IdRequest) {}
+    rpc Update (Staff) returns (ResponseString) {}
+    rpc Get (IdRequest) returns (Staff) {}
+    rpc Delete (IdRequest) returns (ResponseString) {}
+    rpc GetAll (GetAllStaffRequest) returns (GetAllStaffResponse) {}
+    rpc ChangePassword(RequestByPassword) returns (ResponseString) {}
+    rpc UpdateBalance(UpdateBalanceRequest) returns (ResponseString) {}
+    rpc GetByUsername(RequestByUsername) returns (Staff) {}
+  }
+  
+  // The request message containing the user's name.
+
+  
+  message CreateStaff {
+    string BranchId = 1;
+    string TarifId = 2;
+    string TypeStaff =3;
+    string Name = 4;
+    float Balance =5;
+    int64 Age = 6;
+    string BirthDate = 7;
+    string Login = 8;
+    string Password = 9;
+  }
+
+  message Staff {
+    string Id = 1;
+    string BranchId = 2;
+    string TarifId = 3;
+    string TypeStaff =4;
+    string Name = 5;
+    float Balance =6;
+    int64 Age = 7;
+    string BirthDate = 8;
+    string Login = 9;
+    string Password = 10;
+    string Created_at = 11;
+    string Updated_at = 12;
+  }
+
+  message GetAllStaffRequest {
+    int64 page = 1;
+    int64 limit = 2;
+    string Name = 3;
+  }
+  
+  // The response message containing the greetings
+
+  message GetAllStaffResponse {
+    repeated Staff Staffs = 1;
+    int64 Count = 2;
+  }
+
+  message UpdateBalanceRequest {
+    string TransactionType = 1;
+    string SourceType = 2;
+    StaffType ShopAssistent = 3;
+    StaffType Cashier = 4;
+    string SaleId = 5;
+    string Text = 6;
+  }
+
+  message StaffType {
+    string StaffId = 1;
+    float Amount  = 2;
+  }
+
+
+  message RequestByUsername {
+    string Login = 1;
+  }
+
+
+  message RequestByPassword {
+    string Id = 1;
+    string Password = 2;
+  }

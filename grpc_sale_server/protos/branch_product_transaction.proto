@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package sale_service;
+option go_package = "genproto/sale_service";
+
+import "sale.proto";
+
+service BranchTransactionServer {
+    rpc Create (CreateBranchTransaction) returns (IdRequest) {}
+    rpc Update (BranchTransaction) returns (ResponseString) {}
+    rpc Get (IdRequest) returns (BranchTransaction) {}
+    rpc Delete (IdRequest) returns (ResponseString) {}
+    rpc GetAll (GetAllBranchTransactionRequest) returns (GetAllBranchTransactionResponse) {}
+}
+
+message CreateBranchTransaction {
+    string BranchId = 1;
+    string StaffId = 2;
+    string ProductId =3;
+    string Type = 4;
+    float Price =5;
+    int64 Quantity = 6;
+}
+
+message BranchTransaction {
+    string Id = 1;
+    string BranchId = 2;
+    string StaffId = 3;
+    string ProductId = 4;
+    string Type = 5;
+    float Price = 6;
+    int64 Quantity = 7;
+    string Created_at = 8;
+    string Updated_at = 9;
+}
+
+message GetAllBranchTransactionRequest {
+    int64 Page = 1;
+    int64 Limit = 2;
+}
+
+message GetAllBranchTransactionResponse {
+    repeated BranchTransaction BranchTransactions = 1;
+    int64 Count = 2;
+}

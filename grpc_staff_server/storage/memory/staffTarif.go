@@ -3,8 +3,8 @@ package memory
 import (
 	"context"
 	"fmt"
-	"gocrud/packages/helper"
 	staff_service "staff/genproto"
+	"staff/packages/helper"
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgx"
